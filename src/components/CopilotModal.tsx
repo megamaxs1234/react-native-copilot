@@ -14,6 +14,7 @@ import {
   Platform,
   StatusBar,
   View,
+  I18nManager,
   type LayoutChangeEvent,
   type LayoutRectangle,
   type ViewStyle,
@@ -339,7 +340,9 @@ export const CopilotModal = forwardRef<CopilotModalHandle, Props>(
             style={[
               styles.stepNumberContainer,
               {
-                left: animatedValues.stepNumberLeft,
+                //left: animatedValues.stepNumberLeft,
+                      right: I18nManager.isRTL == true ? animatedValues.stepNumberLeft : null,
+              left: I18nManager.isRTL == true ? null :animatedValues.stepNumberLeft,
                 top: Animated.add(animatedValues.top, -STEP_NUMBER_RADIUS),
               },
             ]}
@@ -348,7 +351,10 @@ export const CopilotModal = forwardRef<CopilotModalHandle, Props>(
           </Animated.View>
 
           {!!arrowSize && (
-            <Animated.View key="arrow" style={[styles.arrow, arrowStyles]} />
+            <Animated.View key="arrow" style={[styles.arrow, arrowStyles,{
+               right: I18nManager.isRTL == true ? animatedValues.stepNumberLeft : null,
+              left: I18nManager.isRTL == true ? null :animatedValues.stepNumberLeft,
+            }]} />
           )}
           <Animated.View
             key="tooltip"
